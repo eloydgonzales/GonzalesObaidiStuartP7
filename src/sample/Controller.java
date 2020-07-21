@@ -23,6 +23,7 @@ public class Controller implements Initializable {
     int player2Score;
     String player1Name;
     String player2Name;
+    String resultsWinner;
 
     @FXML private ImageView imgHeader;
 
@@ -76,7 +77,7 @@ public class Controller implements Initializable {
 
     @FXML
     void NoneDealAgainOnAction(ActionEvent event) {
-
+        displayResults();
     }
 
     @FXML
@@ -85,6 +86,7 @@ public class Controller implements Initializable {
         game = new ThreeCardBrag();
         player1Score = 0;
         player2Score = 0;
+        resultsWinner = "No game has been played.";
         bntDealCards.setDisable(false);
         taResults.clear();
 
@@ -117,6 +119,7 @@ public class Controller implements Initializable {
         player2Score = 0;
         player1Name = "Player 1";
         player2Name = "Player 2";
+        resultsWinner = "No game has been played.";
     }
 
     private void dealTheCards()
@@ -168,28 +171,27 @@ public class Controller implements Initializable {
         switch (winner)
         {
             case 0:// no winner
-                taResults.setText("No Winner\n" +
-                        player1Name + " Score: " + player1Score + "\n" +
-                        player2Name + " Score: " + player2Score);
+                resultsWinner = "No Winner";
                 break;
             case 1:// player 1 wins
                 player1Score++;
-                taResults.setText(player1Name + " Wins\n" +
-                        player1Name + " Score: " + player1Score + "\n" +
-                        player2Name + " Score: " + player2Score);
+                resultsWinner = player1Name + " Wins";
                 break;
             case 2:// player 2 wins
                 player2Score++;
-                taResults.setText(player2Name + " Wins\n" +
-                        player1Name + " Score: " + player1Score + "\n" +
-                        player2Name + " Score: " + player2Score);
+                resultsWinner = player2Name + " Wins";
                 break;
             case 3:// tie
-                taResults.setText("Tie\n" +
-                        player1Name + " Score: " + player1Score + "\n" +
-                        player2Name + " Score: " + player2Score);
+                resultsWinner = "Tie";
                 break;
         }
+    }
+
+    private void displayResults()
+    {
+        taResults.setText(resultsWinner + "\n" +
+                player1Name + " Score: " + player1Score + "\n" +
+                player2Name + " Score: " + player2Score);
     }
 
     private void updateNames()
