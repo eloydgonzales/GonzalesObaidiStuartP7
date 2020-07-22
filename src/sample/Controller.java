@@ -3,11 +3,13 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.net.URL;
@@ -117,8 +119,9 @@ public class Controller implements Initializable {
         game = new ThreeCardBrag();
         player1Score = 0;
         player2Score = 0;
-        player1Name = "Player 1";
-        player2Name = "Player 2";
+
+        /*player1Name = player1Name;
+        player2Name = player2Name;*/
         resultsWinner = "No game has been played.";
     }
 
@@ -163,6 +166,8 @@ public class Controller implements Initializable {
 
     private void determineWinner()
     {
+        player1Name = tfPlayer1.getText();
+        player2Name = tfPlayer2.getText();
         //1. Set both player hands into the ThreeCardBrag object, brag.
         game.setPlayerHands(hand1, hand2);
         //2. int winner = brag.getWinningHand();
@@ -194,9 +199,9 @@ public class Controller implements Initializable {
                 player2Name + " Score: " + player2Score);
     }
 
-    private void updateNames()
+    /*private void updateNames()
     {
         player1Name = tfPlayer1.getText();
         player2Name = tfPlayer2.getText();
-    }
+    }*/
 }
