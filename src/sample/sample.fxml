@@ -37,7 +37,7 @@
             <children>
                 <ImageView fitHeight="138.0" fitWidth="154.0" layoutX="15.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
                 <ImageView fx:id="imgHeader" fitHeight="117.0" fitWidth="135.0" layoutX="11.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" />
-                <TextArea fx:id="taHeader" editable="false" layoutX="155.0" layoutY="10.0" prefHeight="138.0" prefWidth="208.0" text="Program 7                         ELOYD GONZALES                ALI OBAID              IMICHAEL STUART             Three Card Brag!" wrapText="true">
+                <TextArea fx:id="taHeader" editable="false" layoutX="155.0" layoutY="10.0" prefHeight="138.0" prefWidth="208.0" text="Program 7                         ELOYD GONZALES                ALI OBAID              MICHAEL STUART             Three Card Brag!" wrapText="true">
                     <font>
                         <Font name="Berlin Sans FB Demi Bold" size="15.0" />
                     </font></TextArea>
@@ -51,7 +51,7 @@
                 <ImageView fx:id="img1Card3P1" fitHeight="138.0" fitWidth="108.0" layoutX="380.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
                 <ImageView fx:id="img1Card2P1" fitHeight="138.0" fitWidth="108.0" layoutX="263.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
                 <TextField fx:id="tfPlayer1" layoutX="14.0" layoutY="35.0" prefHeight="86.0" prefWidth="120.0" />
-                <Button fx:id="bntDealCards" layoutX="535.0" layoutY="20.0" mnemonicParsing="false" onAction="#DealCardsOnAction" prefHeight="117.0" prefWidth="108.0" style="-fx-background-radius: 10;" text="Deals Cards" />
+                <Button fx:id="bntDealCards" layoutX="535.0" layoutY="20.0" mnemonicParsing="false" onAction="#DealCardsOnAction" prefHeight="117.0" prefWidth="108.0" style="-fx-background-radius: 10;" text="Deal Cards" />
             </children></Pane>
         <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
             <children>
