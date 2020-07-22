@@ -1,3 +1,11 @@
+/**************************
+ * Ali Obaidi             *
+ * aobaidi@cnm.edu        *
+ * GonzalesStuartObaidiP7 *
+ * Controller.java        *
+ * ************************/
+
+
 package sample;
 
 import javafx.event.ActionEvent;
@@ -67,14 +75,17 @@ public class Controller implements Initializable {
 
     @FXML
     void GameRulesOnAction(ActionEvent event) {                  // Game Rules Message
-        JOptionPane.showMessageDialog(null,"3 Cards are dealt to each player.\n" +
+        //MS pull rules from ThreeCardBrag class per specs
+        JOptionPane.showMessageDialog(null,
+                game.getRules());
+        /*JOptionPane.showMessageDialog(null,"3 Cards are dealt to each player.\n" +
                 "A player who holds any of the following cards wins:\n" +
                 "Three 3's or an Ace\n" +
                 "2 or 3 of the same card or suit\n" +
                 "King, Queen or Jack\n" +
                 "But if two players both have winning hands,\n" +
                 "Three 3's or an Ace beat the 2 or 3 cards of same suit or number which in turn beat a King,\n" +
-                "Queen or Jack. If there is a tie between players, no one wins.\n","Game Rules", JOptionPane.INFORMATION_MESSAGE );
+                "Queen or Jack. If there is a tie between players, no one wins.\n","Game Rules", JOptionPane.INFORMATION_MESSAGE ); */
     }
 
     @FXML
