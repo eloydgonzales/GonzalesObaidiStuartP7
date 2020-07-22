@@ -1,3 +1,10 @@
+/**************************
+ * Eloyd Gonzales         *
+ * egonzales164@cnm.edu   *
+ * GonzalesStuartObaidiP7 *
+ * ThreeCardBrag.java     *
+ * ************************/
+
 package sample;
 // TODO check hand sizes
 public class ThreeCardBrag
@@ -57,9 +64,10 @@ public class ThreeCardBrag
         return winningHand;
     }
 
-    public String getRules()
+    public String getRules() //MS added new lines so formats better on JOptionPane in Controller
     {
-        return "The player with the highest ranking hand wins. The rankings from highest to least are: Three 3's or an Ace, 2 or 3 of the same card or suit, a King Queen or Jack ";
+        return "The player with the highest ranking hand wins.\nThe rankings from highest to lowest are:\n" +
+                "Three 3's or an Ace\n2 or 3 of the same card or suit\nKing Queen or Jack ";
     }
 
     private int checkHandRank(Card [] hand)
@@ -82,9 +90,11 @@ public class ThreeCardBrag
         // check for 2 or 3 of the same card or suit
         if (hand[0].getRank() == hand[1].getRank() ||
                 hand[0].getRank() == hand[2].getRank() ||
+                hand[1].getRank() == hand[2].getRank() || //MS add a check for cards 2 and 3 rank
                 hand[0].getSuit() == hand[1].getSuit() ||
-                hand[0].getSuit() == hand[2].getSuit())
-        {
+                hand[0].getSuit() == hand[2].getSuit() ||
+                hand[1].getSuit() == hand[2].getSuit()){ //MS add a check for cards 2 and 3 suit
+
             return 2;
         }
 
