@@ -34,6 +34,7 @@ public class Controller implements Initializable {
     String player1Name;
     String player2Name;
     String resultsWinner;
+    private int score1 , score2;
 
     @FXML private ImageView imgHeader;
 
@@ -70,6 +71,22 @@ public class Controller implements Initializable {
         if (!deck.isDeckGood())
         {
             bntDealCards.setDisable(true);
+            if (score1 > score2)
+            {
+                JOptionPane.showMessageDialog(null, player1Name + " Won: " + score1 +
+                        " times\n"+ player2Name + " Won :" +score2 + " times" +"\n" + player1Name +" is the winner" +
+                        "\nPress OK to continue");
+            }
+            else if (score2 > score1)
+            {
+                JOptionPane.showMessageDialog(null, player1Name + " Won: " + score1 +
+                        " times\n"+ player2Name + " Won :" + score2 + " times"+ "\n" + player2Name + " is the winner" +
+                        "\nPress OK to continue");
+            }else {
+                JOptionPane.showMessageDialog(null, player1Name + " Won: " + score1 +
+                        " times\n" + player2Name + " Won :" + score2 + " times" + "\n" + "No winner is a tie" +
+                        "\nPress OK to continue");
+            }
         }
     }
 
@@ -201,6 +218,8 @@ public class Controller implements Initializable {
                 resultsWinner = "Tie";
                 break;
         }
+        score1 =+ player1Score;
+        score2 =+ player2Score;
     }
 
     private void displayResults()
