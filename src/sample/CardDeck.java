@@ -55,7 +55,7 @@ public class CardDeck {
             return cardArray[lastCardReturned];
         }
     }
-
+    /*
     public boolean isDeckGood()
     {
         if (counter < 46)
@@ -63,5 +63,5 @@ public class CardDeck {
             return true;
         }
         return false;
-    }
+    }*/
 }
