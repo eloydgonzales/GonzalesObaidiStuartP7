@@ -61,7 +61,11 @@ public class ThreeCardBrag
 
     public int getWinningHand()
     {
-        return winningHand;
+        if(player1Hand == null) {
+            return 0;
+        } else {
+            return winningHand;
+        }
     }
 
     public String getRules() //MS added new lines so formats better on JOptionPane in Controller
