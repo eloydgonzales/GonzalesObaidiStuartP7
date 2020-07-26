@@ -17,6 +17,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import javax.swing.*;
@@ -35,6 +36,8 @@ public class Controller implements Initializable {
     String player2Name;
     String resultsWinner;
     private int score1 , score2;
+    int dealCount = 0; //MS add counter for number of deals
+    int winner;
 
     @FXML private ImageView imgHeader;
 
@@ -66,12 +69,34 @@ public class Controller implements Initializable {
 
     @FXML
     void DealCardsOnAction(ActionEvent event) {
-        dealTheCards();
-        determineWinner();
-        if (!deck.isDeckGood())
+        //MS increment deal hand
+        dealCount ++;
+        //MS set player names on first deal
+        if(dealCount <= 1){
+            if(tfPlayer1.getText().equals("It's a Tie!") || tfPlayer1.getText().equals("")) {
+                player1Name = "Player 1";
+                tfPlayer1.setText(player1Name);
+            } else {
+                player1Name = tfPlayer1.getText();
+            }
+            if(tfPlayer2.getText().equals("It's a Tie!") || tfPlayer2.getText().equals("")) {
+                player2Name = "Player 2";
+                tfPlayer2.setText(player2Name);
+            } else {
+                player2Name = tfPlayer2.getText();
+            }
+        } else {
+            //MS return tf values to player names on each deal
+            tfPlayer1.setFont(Font.font ("System", 12));
+            tfPlayer2.setFont(Font.font ("System", 12));
+            tfPlayer1.setText(player1Name);
+            tfPlayer2.setText(player2Name);
+
+        }
+        if (dealCount >= 8) //MS check on how many times cards dealt
         {
             bntDealCards.setDisable(true);
-            if (score1 > score2)
+           /* if (score1 > score2)
             {
                 JOptionPane.showMessageDialog(null, player1Name + " Won: " + score1 +
                         " times\n"+ player2Name + " Won :" +score2 + " times" +"\n" + player1Name +" is the winner" +
@@ -86,8 +111,11 @@ public class Controller implements Initializable {
                 JOptionPane.showMessageDialog(null, player1Name + " Won: " + score1 +
                         " times\n" + player2Name + " Won :" + score2 + " times" + "\n" + "No winner is a tie" +
                         "\nPress OK to continue");
-            }
+            }*/
         }
+        dealTheCards();
+        determineWinner();
+
     }
 
     @FXML
@@ -108,17 +136,49 @@ public class Controller implements Initializable {
     @FXML
     void NoneDealAgainOnAction(ActionEvent event) {
         displayResults();
+
+        //MS move JOPtionPane on final hand to check winner button
+        if (bntNoneDealAgain.getText().equals("Display Overall Results")){
+            if (score1 > score2) {
+                JOptionPane.showMessageDialog(null, player1Name + " Won: " + score1 +
+                        " times\n" + player2Name + " Won :" + score2 + " times" + "\n" + player1Name + " is the winner" +
+                        "\nPress OK to continue");
+            } else if (score2 > score1) {
+                JOptionPane.showMessageDialog(null, player1Name + " Won: " + score1 +
+                        " times\n" + player2Name + " Won :" + score2 + " times" + "\n" + player2Name + " is the winner" +
+                        "\nPress OK to continue");
+            } else {
+                JOptionPane.showMessageDialog(null, player1Name + " Won: " + score1 +
+                        " times\n" + player2Name + " Won :" + score2 + " times" + "\n" + "No winner is a tie" +
+                        "\nPress OK to continue");
+            }
+        }
+        //MS change button option to display the overall winner in a JOptionPane
+        if (dealCount >= 8) //MS check on how many times cards dealt
+        {
+            bntNoneDealAgain.setText("Display Overall Results");
+        }
+
+
     }
 
     @FXML
     void PlayAgainOnAction(ActionEvent event) {
         deck = new CardDeck();
         game = new ThreeCardBrag();
+        dealCount = 0; //MS set deal count to zero on each new game
         player1Score = 0;
         player2Score = 0;
         resultsWinner = "No game has been played.";
         bntDealCards.setDisable(false);
         taResults.clear();
+        //MS reset fonts and player names
+        tfPlayer1.setFont(Font.font ("System", 12));
+        tfPlayer2.setFont(Font.font ("System", 12));
+        tfPlayer1.clear();
+        tfPlayer2.clear();
+        bntNoneDealAgain.setText("Display Winner");
+        winner = 0;
 
         Image placeholder = new Image(this.getClass().getResource("images/b2fv.png").toExternalForm());                   // Game back cards images
         img1Card1P1.setImage(placeholder);
@@ -155,6 +215,8 @@ public class Controller implements Initializable {
 
     private void dealTheCards()
     {
+
+
         //  1. Create two arrays of three cardNames, one for each player. These will get values soon.
         hand1 = new Card[3];
         hand2 = new Card[3];
@@ -194,12 +256,13 @@ public class Controller implements Initializable {
 
     private void determineWinner()
     {
-        player1Name = tfPlayer1.getText();
-        player2Name = tfPlayer2.getText();
+        //MS Move set players to first deal
+        //player1Name = tfPlayer1.getText();
+        //player2Name = tfPlayer2.getText();
         //1. Set both player hands into the ThreeCardBrag object, brag.
         game.setPlayerHands(hand1, hand2);
         //2. int winner = brag.getWinningHand();
-        int winner = game.getWinningHand();
+        winner = game.getWinningHand();
         //3. display the information that corresponds to the 4 cases., 0 - 3
         switch (winner)
         {
@@ -224,9 +287,28 @@ public class Controller implements Initializable {
 
     private void displayResults()
     {
-        taResults.setText(resultsWinner + "\n" +
+        taResults.setText(resultsWinner + "\n\n" +
                 player1Name + " Score: " + player1Score + "\n" +
                 player2Name + " Score: " + player2Score);
+
+        //MS set textfields to react to win/loss/tie
+        switch (winner)
+        {
+            case 0:// no winner
+                tfPlayer1.setText("It's a Tie!");
+                tfPlayer2.setText("It's a Tie!");
+                break;
+            case 1:// player 1 wins
+                tfPlayer1.setFont(Font.font ("Serif", 16));
+                break;
+            case 2:// player 2 wins
+                tfPlayer2.setFont(Font.font ("Serif", 16));
+                break;
+            case 3:// tie
+                tfPlayer1.setText("It's a Tie!");
+                tfPlayer2.setText("It's a Tie!");
+                break;
+        }
     }
 
     /*private void updateNames()
